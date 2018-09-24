@@ -1,0 +1,51 @@
+.controls {
+  .display-flex();
+  .justify-content(space-between);
+  .align-items(flex-end);
+  .flex-wrap(wrap);
+  font-size: 15px;
+
+  & > div {
+    .flex(0 1 25%);
+    padding: 10px;
+
+    @media @mobile {
+      padding: 0;
+      .flex(0 1 50%);
+      &:nth-child(odd) {
+        padding-right: 2px;
+      }
+      &:nth-child(even) {
+        padding-left: 2px;
+      }
+    }
+  }
+
+  input, label.formatted {
+    width: 100%;
+    margin: 0;
+    border: 1px solid @df-border-gray;
+    border-radius: 2px;
+    padding: 2px;
+    font-size: 16px;
+    line-height: 22px;
+    background-color: white;
+    font-family: @df-sans;
+  }
+
+  input[type="number"] {
+    opacity: 0;
+
+    &:focus, &:hover {
+      opacity: 1;
+    }
+  }
+
+  label.formatted {
+    margin-top: -28px;
+  }
+
+  input:focus + label.formatted, input:hover + label.formatted {
+    display: none;
+  }
+}

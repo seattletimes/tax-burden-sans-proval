@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <%= t.include("partials/_head.html", grunt.data.json) %>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <style>
+  .controls > div {
+      -webkit-flex: 0 1 33%;
+      -ms-flex: 0 1 33%;
+      flex: 0 1 33%;
+  }
+  h3 {
+    margin: 20px auto;
+    max-width: 600px;
+  }
+  th {
+    text-align: left;
+    width: 50%;
+  }
+  ul {
+      list-style-type: none;
+      margin: 20px auto;
+      max-width: 600px;
+      padding-left: 0;
+  }
+  </style>
+  <body>
+    <responsive-child>
+      <main v-cloak class="interactive">
+        <header>
+          <h1>Compare local business taxes in Washington</h1>
+          <p>Explore the local business tax bill in 10 of Washington’s major cities by clicking on one of our example businesses – a supermarket and a software company – or customizing the analysis by setting your own parameters. There are important caveats to be aware of in this comparison, and it should not be used to estimate your actual local tax burden. Open the info boxes <small>ⓘ</small> to read more about the parameters and taxes, and see a more detailed explanation below.</p>
+        </header>
+
+        <span class="radio-hed">Choose an example business</span>
+        <div class="radio presets">
+          <label v-for="(example, exampleName) in examples" v-bind:class="{selected: preset === exampleName}">
+            {{ exampleName }}
+            <input type="radio" v-model="preset" v-bind:value="exampleName">
+          </label>
+        </div>
+
+        <p>If you want to customize the analysis to your own business, start by selecting the type of business:</p>
+
+        <span class="radio-hed">Type of business <info v-bind:text="businessInputs.bizType.info" where="bizInputInfo"></info></span>
+        <div class="radio">
+          <label v-for="bizType in bizTypes" v-bind:class="{selected: businessInputs.bizType.value === bizType}">
+            {{ bizType }}
+            <input type="radio" v-model="businessInputs.bizType.value" v-bind:value="bizType" v-on:input="preset = 'newCustom'">
+          </label>
+        </div>
+
+        <p>Then set the parameters for your business – gross revenue, employees and taxable business purchases – to see how business and occupation taxes (B&O), sales taxes and business license fees compare from city to city. (Utility taxes are not included in this calculator. Property taxes, while significant, are problematic to compare. Property tax rates are given below, but are not included in the calculator.) You can enter the exact number, or move the slider bars for each parameter:</p>
+
+        <div class="controls">
+          <div v-for="(i, short) in businessInputs" v-if="short !== 'space' && short !== 'bizType'">
+            <label v-bind:for="short">
+              {{ i.name }}
+              <info v-bind:text="i.info" where="bizInputInfo"></info>
+            </label>
+            <input v-bind:id ="short" type="number" v-model.number="i.value" min="0" v-bind:max="i.max" v-bind:step="i.step" v-on:input="preset = 'newCustom'" v-if="short !== 'space'">
+            <label v-bind:for="short" class="formatted" aria-hidden="true" v-if="short !== 'space'">{{ formatInput(short, i.value) }}</label>
+            <input type="range" v-model.number="i.value" min="0" v-bind:max="i.max" v-bind:step="i.step" v-on:input="preset = 'newCustom'" v-if="short !== 'space'">
+          </div>
+        </div>
+        <transition name="slide">
+          <div class="info-box input-info" v-if="bizInputInfo" v-html="bizInputInfo"></div>
+        </transition>
+
+        <div class="result">
+          <ul class="legend">
+            <li v-for="outputKey in outputKeys" tabindex="0"
+            v-on:mouseover="showOnly(outputKey)" v-on:focus="showOnly(outputKey, true)"
+            v-on:mouseout="showOnly()" v-on:blur="showOnly(null, true)">
+            {{ outputsMeta[outputKey].name }} <span v-bind:class="[outputKey]"></span>
+            </li>
+          </ul>
+
+          <div class="chart">
+            <div v-for="city in cities">
+              <div class="column">
+                <div class="column-label">
+                  {{ city }}
+                </div>
+                <div class="bricks">
+                  <div class="brick" v-for="outputKey in outputKeys"
+                    v-bind:style="{ width: `${outputs[city][outputKey].value / totalBurden.max * maxColWidth}px` }"
+                    v-bind:class="[outputKey, { hidden: outputsMeta[outputKey].hidden }]"
+                    v-on:focus="showHoverBox($event, city, outputKey)" v-on:blur="closeHoverBox"
+                    v-on:mousemove="showHoverBox($event, city, outputKey)" v-on:mouseout="closeHoverBox"
+                    tabindex="0"></div>
+                </div>
+                <div class="column-total">{{ totalBurden[city] }}</div>
+              </div>
+            </div>
+
+            <div class="hover-box" v-show="hoverBoxContent">
+              <button class="close" v-on:click="closeHoverBox">close</button>
+              <equation v-bind:parts="hoverBoxContent"></equation>
+              <span class="caveat" v-if="hoverCaveat">* {{ hoverCaveat}}</span>
+            </div>
+          </div>
+        </div>
+
+        <section>
+          <h3>Property taxes</h3>
+          <p>Businesses pay property taxes at the same rate as other property owners. If they lease space, their rent typically reflects the taxes paid by landlords, though business tenants may also pay property taxes themselves.
+
+          <p>“Here, we provide consolidated levy rates in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
+        </section>
+
+        <section>
+            <div style="overflow-x:auto; margin: 20px auto; max-width: 600px;">
+              <table>
+              <tr>
+                <th>City</th>
+                <th>Median property tax levy rate</th>
+              </tr>
+              <tr>
+                <td>Seattle</td>
+                <td>9.56207</td>
+              </tr>
+              <tr>
+                <td>Spokane</td>
+                <td>13.88061157</td>
+              </tr>
+              <tr>
+                <td>Tacoma</td>
+                <td>15.7621075</td>
+              </tr>
+              <tr>
+                <td>Vancouver</td>
+                <td>12.08074152</td>
+              </tr>
+              <tr>
+                <td>Bellevue</td>
+                <td>9.19441</td>
+              </tr>
+              <tr>
+                <td>Kent</td>
+                <td>12.40922</td>
+              </tr>
+              <tr>
+                <td>Everett</td>
+                <td>12.1687</td>
+              </tr>
+              <tr>
+                <td>Kirkland</td>
+                <td>9.91181</td>
+              </tr>
+              <tr>
+                <td>Redmond</td>
+                <td>9.97384</td>
+              </tr>
+            </table>
+          </div>
+
+          <p>“But the levy rate is only half the equation. The other half is the value of the property, as determined by county assessors. Because of wide variations in local real estate values, it is difficult to make a broadly applicable comparison of the property taxes businesses would pay from one city to another.
+
+          <p>A 15,000-square-foot premium office space in Seattle or Bellevue will have a very different value than a similar space in Vancouver or Spokane. That’s part of why King County cities have substantially lower levy rates than other cities in the comparison.
+
+          <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane, or Clark counties.<br>
+            <ul>
+              <li><a href="https://payment.kingcounty.gov/Home/Index?app=PropertyTaxes">King</a></li>
+              <li><a href="http://gis.snoco.org/maps/property/viewer.htm">Snohomish</a></li>
+              <li><a href="https://epip.co.pierce.wa.us/CFApps/atr/ePIP/search.cfm">Pierce</a></li>
+              <li><a href="http://cp.spokanecounty.org/scout/propertyinformation/">Spokane</a></li>
+              <li><a href="http://gis.clark.wa.gov/gishome/property/">Clark</a></li>
+            </ul>
+          </p>
+        </section>
+
+        <footer>
+          <h2>Methology and caveats</h2>
+
+          <p>During Seattle’s head-tax debate this spring, there was lots of rhetoric about rising business taxes in the city, but few, if any, comparisons of Seattle’s taxes to those levied by other Washington cities. Such a comparison is complicated by variations in tax structures and rates levied in each city, in the levels of service provided by different cities and in the cost of doing business from place to place.</p>
+
+          <p>Washington cities can tax businesses in four main ways: Property taxes, local sales taxes, business and occupation taxes (B&O), and utility taxes. There are also business license fees, sometimes augmented by what are effectively head taxes. There are other taxes and licensing fees cities collect from specific businesses – hotels, for example – that we’re not dealing with here.</p>
+
+          <p>For this calculator, we’ve focused on B&O, sales taxes and business license fees, including those with a per-employee component.</p>
+
+          <p>The calculator doesn’t purport to provide a full picture of the local business tax burden for each city. Most businesses operate across city lines and would owe taxes to multiple jurisdictions, in addition to the state. Rather, the point is to give you a sense of how some significant business taxes vary from one city to another.</p>
+
+          <transition name="slide">
+            <div v-show="expandedFooter" class="more-methodology">
+              <p>Washington cities can tax businesses in four main ways: Property taxes, local sales taxes, business and occupation taxes (B&O), and utility taxes. There are also business license fees, sometimes augmented by what are effectively head taxes. There are other taxes and licensing fees cities collect from specific businesses – hotels, for example – that we’re not dealing with here.</p>
+              <p>For this calculator, we’ve focused on B&O, property and sales taxes, and business license fees, including those with a per-employee component.</p>
+              <p>The calculator doesn’t purport to provide a full picture of the local business tax burden for each city. Most businesses operate across city lines and would owe taxes to multiple jurisdictions, in addition to the state. Rather, the point is to give you a sense of how several significant business taxes vary from one city to another.</p>
+
+              <h3>Business prototypes</h3>
+              <p>Working with economic consulting firm ECONorthwest, we developed two example businesses – a supermarket and a software company – using various datasets to determine representative numbers for revenue, employment and property value, including from Food Marketing Association statistics, Economic Census data and National IRS Corporate Tax Return data.</p>
+
+              <h3>B&O tax</h3>
+              <p><a href="https://wacities.org/docs/default-source/resources/botaxrates.pdf">Local B&O tax rates, effective Jan. 1, 2018</a>, calculated for each city based on gross revenue</p>
+
+              <h3>Business license and head tax</h3>
+              <p>Business license and per-employee fees calculated based on parameters laid out at each city’s website:</p>
+              <ul>
+                <li><a href=" https://www.seattle.gov/business-licenses-and-taxes/business-licenses#cost">Seattle</a></li>
+                <li><a href="https://bls.dor.wa.gov/cities/spokanefees.aspx">Spokane</a></li>
+                <li><a href="http://www.cityoftacoma.org/cms/One.aspx?portalId=169&pageId=124431">Tacoma</a> </li>
+                <li><a href="https://www.cityofvancouver.us/fms/page/business-and-special-licenses">Vancouver</a></li>
+                <li><a href="https://www.bellevuewa.gov/city-government/departments/finance/doing-business-with-bellevue/business-licenses/">Bellevue</a></li>
+                <li><a href="https://www.kentwa.gov/home/showdocument?id=9398">Kent</a></li>
+                <li><a href="https://everettwa.gov/175/Business-License">Everett</a> </li>
+                <li><a href="https://www.rentonwa.gov/cms/one.aspx?pageId=9824882">Renton</a></li>
+                <li><a href="https://www.kirklandwa.gov/depart/Finance_and_Administration/doingbusiness/Business_Licenses.htm">Kirkland</a> </li>
+                <li><a href="http://www.redmond.gov/business/BusinessLicensing/FeesPayments/">Redmond</a></li>
+              </ul>
+
+              <h3>Sales tax on business purchases</h3>
+              <p><a href="https://dor.wa.gov/sites/default/files/legacy/Docs/forms/ExcsTx/LocSalUseTx/LocalSlsUseFlyer_18_Q3_alpha.pdf">Local sales tax rates, effective July 1 through Sept. 30, 2018</a>, calculated based on retail purchases by the business itself. The calculator is preset to assume taxable business purchases amounting to 0.5% of company revenue, but the value can be adjusted. The tax rates given include all local sales taxes, including those imposed by other local jurisdictions such as counties and transit districts. In Seattle’s case, for example, less than a third of the local sales tax goes to the city. King County and Sound Transit get the rest. The calculator does not include the state sales tax rate of 6.5 percent. Spokane and Vancouver, situated near borders with states that have no sales tax, have lower local sales tax rates.</p>
+
+              <h3>Property tax</h3>
+              <p>This is the most problematic tax rate to compare among cities because of the formula used to set levy rates. We’ve used the consolidated levy rate in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
+              <p>The other part of the property tax equation is property value. The calculator asks you to input a property value and then applies each city’s consolidated levy rate to that value. But in reality, an equivalent property will have substantially different assessed values in Seattle and Spokane.</p>
+              <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane, or Clark counties.</p>
+              <ul>
+                <li><a href="http://info.kingcounty.gov/Finance/Treasury/PropertyTax/PropertySearch.aspx">King</a></li>
+                <li><a href="http://gis.snoco.org/maps/property/viewer.htm">Snohomish</a></li>
+                <li><a href="https://epip.co.pierce.wa.us/CFApps/atr/ePIP/search.cfm">Pierce</a></li>
+                <li><a href="http://cp.spokanecounty.org/scout/propertyinformation/">Spokane</a></li>
+                <li><a href="http://gis.clark.wa.gov/gishome/property/">Clark</a></li>
+              </ul>
+            </div>
+          </transition>
+          <button v-if="!expandedFooter" v-on:click="expandedFooter = true">Tap to read full methodology</button>
+        </footer>
+        <p class="credits">Reporting and research by Benjamin Romano. Design and development by Alec Glassford.<br>
+          <em>Economics consulting firm ECONorthwest provided pro bono research support and concept development.</em></p>
+      </main>
+    </responsive-child>
+    <script>
+      window.rates = <%= JSON.stringify(json.rates) %>;
+    </script>
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_analytics.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>

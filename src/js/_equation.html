@@ -1,0 +1,12 @@
+<div class="equation">
+  <div v-for="part in parts" class="equation-part">
+    <template v-if="part.length === 1">
+      {{ part[0] }}
+    </template>
+    <template v-else>
+      <div class="info-value">{{ part[0] }}</div>
+      <div class="info-bracket"></div>
+      <div class="info-annotation">{{ part[1] }}</div
+    </template>
+  </div>
+</div>

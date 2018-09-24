@@ -1,0 +1,144 @@
+// colors
+.bo {
+  background-color: #005235;
+}
+.head {
+  background-color: #195f8e;
+}
+.sales {
+  background-color: #83c5a2;
+}
+.license {
+  background-color: #f2d864;
+}
+.property {
+  background-color: #db9335;
+}
+
+.chart {
+  position: relative;
+  padding: 10px;
+  @media @mobile {
+    padding: 5px 0px;
+  }
+}
+
+.column {
+  height: 30px;
+  .display-flex();
+  .justify-content(flex-start);
+  .align-items(center);
+  @media @mobile {
+    padding: 2px 0;
+    border-top: 1px solid @df-light-gray;
+    height: auto;
+    .justify-content(space-between);
+    flex-wrap: wrap;
+    line-height: 1;
+  }
+}
+
+.column-label {
+  .flex(0 0 110px); // Never shrink
+}
+
+.bricks {
+  .display-flex();
+  .justify-content(flex-start);
+  @media @mobile {
+    .flex(0 0 100%);
+    order: 3;
+  }
+}
+
+.brick {
+  .flex(0 0 auto); // Never grow or shrink!
+  margin: auto 0;
+  height: 20px;
+  transition: width .5s ease, height .1s ease;
+
+  @media @mobile {
+    height: 10px;
+  }
+
+  &.hidden {
+    width: 0 !important; // Use width so we can animate
+  }
+
+  &:hover, &:focus {
+    height: 30px;
+
+    @media @mobile {
+      height: 10px;
+    }
+  }
+}
+
+.column-total {
+  padding-left: 10px;
+}
+
+.hover-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 1px solid fade(@df-border-gray, 50%);
+  border-radius: 2px;
+  box-shadow: 4px 4px 8px -2px fade(black, 20%);
+  background-color: white;
+  
+  .close {
+    display: none;
+    
+    @media @mobile {
+      display: block;
+      float: right;
+      background: transparent;
+      border: none;
+      padding: 5px 10px 0;
+      font-variant: small-caps;
+      color: @df-middle-gray;
+
+      &:hover, &:focus {
+        cursor: pointer;
+        color: @df-dark-gray;
+      }
+    }
+  }
+  
+  .equation {
+    clear: both;
+    padding: 10px;
+    .display-flex();
+    .justify-content(space-around);
+    .flex-wrap(wrap);
+  }
+
+  .equation-part {
+    padding: 0 5px;
+  }
+  .info-value {
+    padding: 0 5px;
+    text-align: center;
+  }
+
+  .info-bracket {
+    margin-top: -10px;
+    height: 10px;
+    border-left: 1px solid @df-dark-gray;
+    border-right: 1px solid @df-dark-gray;
+    border-bottom: 1px solid @df-dark-gray;
+  }
+
+  .info-annotation {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .caveat {
+    display: block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0 10px 10px;
+  }
+}

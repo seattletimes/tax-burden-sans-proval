@@ -1,0 +1,112 @@
+{
+  "Seattle": {
+    "property": 9.56207,
+    "sales": 0.036,
+    "retail": 0.00222,
+    "services": 0.00427,
+    "manufacturing": 0.00222,
+    "wholesale": 0.00222,
+    "license": "19999:55|499999:110|1999999:480|4999999:1000|Infinity:2000",
+    "head": 0,
+    "threshold": 100000
+  },
+  "Tacoma": {
+    "property": 15.7621075,
+    "sales": 0.036,
+    "retail": 0.00153,
+    "services": 0.004,
+    "manufacturing": 0.0011,
+    "wholesale": 0.00102,
+    "license": "11999:25|150000:110|Infinity:250",
+    "head": 0,
+    "threshold": 250000
+  },
+  "Bellevue": {
+    "property": 9.19441,
+    "sales": 0.035,
+    "retail": 0.001496,
+    "services": 0.001496,
+    "manufacturing": 0.001496,
+    "wholesale": 0.001496,
+    "license": 90,
+    "head": 0,
+    "threshold": 160000
+  },
+  "Redmond": {
+    "property": 9.97384,
+    "sales": 0.035,
+    "retail": 0,
+    "services": 0,
+    "manufacturing": 0,
+    "wholesale": 0,
+    "license": 0,
+    "head": 112,
+    "threshold": 0
+  },
+  "Kirkland": {
+    "property": 9.91181,
+    "sales": 0.035,
+    "retail": 0,
+    "services": 0,
+    "manufacturing": 0,
+    "wholesale": 0,
+    "license": "11999:50|Infinity:100",
+    "head": 105,
+    "threshold": 0
+  },
+  "Everett": {
+    "property": 12.1687,
+    "sales": 0.032,
+    "retail": 0.001,
+    "services": 0.001,
+    "manufacturing": 0.001,
+    "wholesale": 0.001,
+    "license": 80,
+    "head": 0,
+    "threshold": 20000
+  },
+  "Spokane": {
+    "property": 13.88061157,
+    "sales": 0.023,
+    "retail": 0,
+    "services": 0,
+    "manufacturing": 0,
+    "wholesale": 0,
+    "license": 113,
+    "head": -1,
+    "threshold": 0
+  },
+  "Vancouver": {
+    "property": 12.08074152,
+    "sales": 0.019,
+    "retail": 0,
+    "services": 0,
+    "manufacturing": 0,
+    "wholesale": 0,
+    "license": "11999:0|Infinity:125",
+    "head": 90,
+    "threshold": 0
+  },
+  "Renton": {
+    "property": 12.51853,
+    "sales": 0.035,
+    "retail": 0.0005,
+    "services": 0.00085,
+    "manufacturing": 0.00085,
+    "wholesale": 0.00085,
+    "license": 150,
+    "head": 0,
+    "threshold": 500000
+  },
+  "Kent": {
+    "property": 12.40922,
+    "sales": 0.035,
+    "retail": 0.00046,
+    "services": 0.00152,
+    "manufacturing": 0.00046,
+    "wholesale": 0.00152,
+    "license": -1,
+    "head": 0,
+    "threshold": 250000
+  }
+}

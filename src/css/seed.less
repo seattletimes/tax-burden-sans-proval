@@ -1,0 +1,160 @@
+@import "seattletimes";
+
+[v-cloak] {
+  display: none;
+}
+
+main.interactive {
+  max-width: 960px;
+}
+
+header {
+  h1 {
+    text-align: center;
+  }
+}
+
+p {
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+label, input {
+  display: block;
+}
+
+.legend {
+  margin: 0;
+  padding: 10px;
+  .display-flex();
+  .justify-content(space-between);
+  .flex-wrap(wrap);
+  font-size: 14px;
+
+  @media @mobile {
+    padding: 0;
+  }
+
+  li {
+    padding: 0;
+    list-style: none;
+    border-radius: 2px;
+    transition: background-color 0.2s linear;
+    &:hover, &:focus {
+      background-color: @df-light-gray;
+    }
+  }
+  span {
+    display: inline-block;
+    vertical-align: text-top;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.i-button {
+  display: inline;
+  margin: 0;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: @df-middle-gray;
+  transition: color 0.2s linear;
+
+  &:hover, &:focus {
+    color: black;
+  }
+}
+
+.info-box {
+  transition: all 0.5s ease;
+  border: 1px solid @df-border-gray;
+  border-radius: 2px;
+  padding: 10px 5px;
+  font-size: 14px;
+  max-width: 600px;
+  overflow-y: scroll;
+
+  p {
+    margin: 14px 0;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.input-info {
+  margin: 10px auto;
+  max-height: 275px;
+}
+
+.city-info {
+  margin: 0 0 20px;
+  max-height: 150px;;
+}
+
+.slide-enter, .slide-leave-to {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid transparent;
+  padding-top: 0;
+  padding-bottom: 0;
+  max-height: 0;
+}
+
+.presets {
+  margin-bottom: 20px;
+}
+
+footer {
+  margin: 0 auto 15px;
+  max-width: 600px;
+  color: @df-dark-gray;
+  font-size: 14px;
+
+  h2 {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 14px auto;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0 14px;
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid @df-border-gray;
+    border-radius: 2px;
+    background-color: transparent;
+    padding: 5px;
+    &:hover, &:focus {
+      cursor: pointer;
+    }
+  }
+}
+
+p.credits {
+  text-align: right;
+  font-size: 12px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+@import "controls";
+@import "chart";
+@import "radio";
