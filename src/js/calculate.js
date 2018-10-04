@@ -31,7 +31,7 @@ var calculateHeadTax = function calculateHeadTax(city, head, numEmployees) {
   return [result, null, null];
 };
 
-var property = function property(city, cityRates, businessInputs) {
+/* var property = function property(city, cityRates, businessInputs) {
   return {
     value: cityRates.property / 1000 * businessInputs.space.value,
     equationParts: [
@@ -40,7 +40,7 @@ var property = function property(city, cityRates, businessInputs) {
       [`${money(cityRates.property, true)} / $1,000 of value`, `${city}'s property tax`],
     ],
   };
-};
+}; */
 
 var bo = function bo(city, cityRates, businessInputs) {
   if (businessInputs.bizIncome.value >= cityRates.threshold) {
@@ -123,7 +123,7 @@ var license = function license(city, cityRates, businessInputs) {
 module.exports = function calculateTaxes(c, cr, bi) {
   if (!c || !cr || !bi) return null;
   return {
-    property: property(c, cr, bi),
+    //property: property(c, cr, bi),
     bo: bo(c, cr, bi),
     head: head(c, cr, bi),
     sales: sales(c, cr, bi),

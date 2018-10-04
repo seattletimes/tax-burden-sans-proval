@@ -11,9 +11,9 @@ var { comma, money, percent, preprocessLicenseRates } = require("./util");
 var calculateTaxes = require("./calculate");
 
 // Defining an array so we have consistent order (unlike Object.keys)
-var outputKeys = ["bo", "head", "sales", "license", "property"];
+var outputKeys = ["bo", "head", "sales", "license"];
 var outputsMeta = {
-  property: { name: "Property tax" },
+  //property: { name: "Property tax" },
   bo: { name: "Business and occupation (B&O) tax " },
   head: { name: "Head tax" },
   sales: { name: "Sales tax" },
@@ -53,15 +53,15 @@ var app = new Vue({
         step: 1e2,
         info: "Spokane, Vancouver, Kirkland, Kent and Redmond charge more for business licenses based on the number of employees a company has. This component of the business license in these cities is displayed in dark blue below.",
       },
-      space: {
-        name: "Assessed property value",
-        value: "Please select one",
-        max: 5e9,
-        step: 1e5,
-        info: "Businesses pay property taxes at the same rate as other property owners. If they lease space, their rent typically reflects the taxes paid by landlords, though business tenants may also pay property taxes themselves. Input the value of the property your company occupies for an estimate of property tax payments on a property of the same value in each city.",
-      },
+      //space: {
+        //name: "Assessed property value",
+        //value: "Please select one",
+        //max: 5e9,
+        //step: 1e5,
+        //info: "Businesses pay property taxes at the same rate as other property owners. If they lease space, their rent typically reflects the taxes paid by landlords, though business tenants may also pay property taxes themselves. Input the value of the property your company occupies for an estimate of property tax payments on a property of the same value in each city.",
+      //},
       taxableSales: {
-        name: "Sales tax on business purchases",
+        name: "Local sales tax on business purchases",
         value: null,
         max: 1,
         step: 1e-3,

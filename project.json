@@ -6,11 +6,11 @@
     },
     "live": {
       "bucket": "projects.seattletimes.com",
-      "path": ""
+      "path": "/2018/business"
     }
   },
-  "title": "",
-  "description": "",
+  "title": "Compare local business tax bills",
+  "description": "Explore the local business tax bill in 10 of Washington’s major cities with this business tax comparison tool",
   "url": "",
   "image": "assets/social.jpg",
   "sheets": ["1Fq_P4kEuDKxnleOXWuiOszYdeQpm6qdUF2Or7PuzMjA"],
