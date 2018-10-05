@@ -110,7 +110,7 @@
               <tr><th>Property taxes by city</th></tr>
               <tr>
               <td class="legend" style="padding-left:0">
-              Median property tax levy rate, per $1,000 of assessed property value
+              Median 2018 property tax levy rate, per $1,000 of assessed property value
               </td>
               </tr>
               </table>
@@ -121,17 +121,17 @@
                 <td class="column-total">$9.56207 </td>
                 </tr>
                 <tr class="column">
-                <td class="column-label">Spokane</td><td><div class="brick property" style="width:138.8061157px">
+                <td class="column-label">Spokane</td><td><div class="brick property" style="width:138.8061px">
                     </div></td>
-                <td class="column-total">$13.88061157</td></tr>
+                <td class="column-total">$13.88061</td></tr>
                 <tr class="column">             
-                <td class="column-label">Tacoma</td><td><div class="brick property" style="width:157.621075px">
+                <td class="column-label">Tacoma</td><td><div class="brick property" style="width:157.6211px">
                     </div></td>
-                <td class="column-total">$15.7621075</td></tr>
+                <td class="column-total">$15.76211</td></tr>
                 <tr class="column">
-                <td class="column-label">Vancouver</td><td><div class="brick property" style="width:120.8074152px">
+                <td class="column-label">Vancouver</td><td><div class="brick property" style="width:120.8074px">
                     </div></td>
-                <td class="column-total">$12.08074152</td></tr>
+                <td class="column-total">$12.08074</td></tr>
                 <tr class="column">
               
                 <td class="column-label">Bellevue</td><td><div class="brick property" style="width:91.9441px">
@@ -147,6 +147,10 @@
                     </div></td>
                 <td class="column-total">$12.1687</td></tr>
                 <tr class="column">
+                <td class="column-label">Renton</td><td><div class="brick property" style="width:125.1853px">
+                    </div></td>
+                <td class="column-total">$12.51853</td></tr>
+                <tr class="column">
                 <td class="column-label">Kirkland</td><td><div class="brick property" style="width:99.1181px">
                     </div></td>
                 <td class="column-total">$9.91181</td></tr>
@@ -161,13 +165,11 @@
           </div>
           <p>Businesses pay property taxes at the same rate as other property owners. If they lease space, their rent typically reflects the taxes paid by landlords, though business tenants may also pay property taxes themselves.
 
-          <p>“Here, we provide consolidated property tax levy rates in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
+          <p>Here, we provide consolidated property tax levy rates in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
 
-          <p>“But the levy rate is only half the equation. The other half is the value of the property, as determined by county assessors. So, for example, the owner of a property in Bellevue valued at $100,000 would owe $919.44 in property taxes.</p> 
+          <p>But the levy rate is only half the equation. The other half is the value of the property, as determined by county assessors. To determine the property tax owed, the value is divided by 1,000 and multiplied by the levy rate. For example, the owner of a property in Bellevue valued at $1 million would owe $9,194.41 in property taxes: $1,000,000/1,000 = 1,000 x 9.19441 = $9,194.41.</p> 
 
-          <p>Because of wide variations in local real estate values, it is difficult to make a broadly applicable comparison of the property taxes businesses would pay from one city to another.</p>
-
-          <p>A 15,000-square-foot premium office space in Seattle or Redmond will have a very different value than a similar space in Vancouver or Spokane. That’s part of why King County cities have substantially lower levy rates than other cities in the comparison.
+          <p>But there are wide variations in local real estate values, and a million-dollar property in Tacoma will likely be very different than one at that valuation in Bellevue. A business looking for the same amount and quality of space may indeed be able to find it for a lower cost in Tacoma than in Bellevue, resulting in a lower total property tax bill, even though Tacoma’s levy rate is higher. That’s part of why it is difficult to make a broadly applicable comparison of the property taxes businesses would pay from one city to another.</p>
 
           <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane, or Clark counties.<br>
             <ul>
@@ -193,9 +195,7 @@
 
           <transition name="slide">
             <div v-show="expandedFooter" class="more-methodology">
-              <h3>Business prototypes</h3>
-              <p>Working with economic consulting firm ECONorthwest, we developed two example businesses – a supermarket and a software company – using various datasets to determine representative numbers for revenue, employment and property value, including from Food Marketing Association statistics, Economic Census data and National IRS Corporate Tax Return data.</p>
-
+              
               <h3>B&O tax</h3>
               <p><a href="https://wacities.org/docs/default-source/resources/botaxrates.pdf">Local B&O tax rates, effective Jan. 1, 2018</a>, calculated for each city based on gross revenue</p>
 
@@ -217,10 +217,6 @@
               <h3>Sales tax on business purchases</h3>
               <p><a href="https://dor.wa.gov/sites/default/files/legacy/Docs/forms/ExcsTx/LocSalUseTx/LocalSlsUseFlyer_18_Q3_alpha.pdf">Local sales tax rates, effective July 1 through Sept. 30, 2018</a>, calculated based on retail purchases by the business itself. The calculator is preset to assume taxable business purchases amounting to 0.5% of company revenue, but the value can be adjusted. The tax rates given include all local sales taxes, including those imposed by other local jurisdictions such as counties and transit districts. In Seattle’s case, for example, less than a third of the local sales tax goes to the city. King County and Sound Transit get the rest. The calculator does not include the state sales tax rate of 6.5 percent. Spokane and Vancouver, situated near borders with states that have no sales tax, have lower local sales tax rates.</p>
 
-              <h3>Property tax</h3>
-              <p>This is the most problematic tax rate to compare among cities because of the formula used to set levy rates. We’ve used the consolidated levy rate in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
-              <p>The other part of the property tax equation is property value. The calculator asks you to input a property value and then applies each city’s consolidated levy rate to that value. But in reality, an equivalent property will have substantially different assessed values in Seattle and Spokane.</p>
-              <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane, or Clark counties.</p>
               
             </div>
           </transition>

@@ -6,12 +6,12 @@
     },
     "live": {
       "bucket": "projects.seattletimes.com",
-      "path": "/2018/business"
+      "path": "/2018/business/compare-local-business-taxes-in-Washington"
     }
   },
   "title": "Compare local business tax bills",
   "description": "Explore the local business tax bill in 10 of Washington’s major cities with this business tax comparison tool",
-  "url": "",
+  "url": "https://projects.seattletimes.com/2018/business/compare-local-business-taxes-in-Washington",
   "image": "assets/social.jpg",
   "sheets": ["1Fq_P4kEuDKxnleOXWuiOszYdeQpm6qdUF2Or7PuzMjA"],
   "standout": false,
