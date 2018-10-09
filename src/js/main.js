@@ -47,7 +47,7 @@ var app = new Vue({
         info: "Cities collect B&O taxes based on a business’ gross receipts from sales inside that city – a straightforward number for retailers and wholesalers that make their sales to customers inside the city limits. For service businesses, cities determine how much revenue they can tax by accounting for the share of a company’s payroll within city limits and revenue directly from customers located in the city. Few businesses only have revenue within a single city.",
       },
       employees: {
-        name: "Employees (full time equivalent)",
+        name: "Employees (full-time equivalent)",
         value: null,
         max: 5e4,
         step: 1e2,
@@ -89,7 +89,9 @@ var app = new Vue({
     preset: null,
     examples: require("./examples"),
     expandedFooter: false,
+    introInfo: "Utility taxes are not included in this calculator. Property taxes, while significant, are problematic to compare; property-tax rates are listed below, but are not included in the calculator.",
   },
+    
   computed: {
     outputs() {
       var result = {};

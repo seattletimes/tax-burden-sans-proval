@@ -30,7 +30,7 @@
       <main v-cloak class="interactive">
         <header>
           <h1>Compare local business taxes in Washington</h1>
-          <p>Explore the local business tax bill in 10 of Washington’s major cities with this business tax comparison tool. There are important caveats to be aware of in this comparison, and it should not be used to estimate your actual local tax burden. Open the info boxes <small>ⓘ</small> to read more about the parameters and taxes, and see a more detailed explanation below.</p>
+          <p>Explore the local business-tax bill in 10 of Washington’s major cities with this tax comparison tool. There are important caveats to be aware of in this comparison, and it should not be used to estimate your actual local tax burden. Open the info boxes <small>ⓘ</small> to read more about the parameters and taxes, and see a more detailed explanation below.</p>
         </header>
 
         <!-- 
@@ -53,7 +53,9 @@
           </label>
         </div>
 
-        <p>Then set the parameters for your business – gross revenue, employees and taxable business purchases – to see how business and occupation taxes (B&O), sales taxes and business license fees compare from city to city. (Utility taxes are not included in this calculator. Property taxes, while significant, are problematic to compare. Property tax rates are given below, but are not included in the calculator.) You can enter the exact number, or move the slider bars for each parameter. Hovering over the chart shows details of each city’s taxes.</p>
+        <p><strong>Then choose the numbers</strong><br/>Set the parameters for your business – gross revenue, employees and taxable business purchases – to see how business and occupation taxes (B&O), sales taxes and business license fees compare from city to city. (Utility and property taxes are not included in this calculator.<info v-bind:text="introInfo" where="bizInputInfo"></info>) You can enter an exact number, or move the slider bars for each parameter. Hovering over the chart shows details of each city’s taxes.</p>
+
+        
 
         <div class="controls">
           <div v-for="(i, short) in businessInputs" v-if="short !== 'space' && short !== 'bizType'">
@@ -110,7 +112,7 @@
               <tr><th>Property taxes by city</th></tr>
               <tr>
               <td class="legend" style="padding-left:0">
-              Median 2018 property tax levy rate, per $1,000 of assessed property value
+              Median 2018 property-tax levy rate, per $1,000 of assessed property value
               </td>
               </tr>
               </table>
@@ -165,13 +167,13 @@
           </div>
           <p>Businesses pay property taxes at the same rate as other property owners. If they lease space, their rent typically reflects the taxes paid by landlords, though business tenants may also pay property taxes themselves.
 
-          <p>Here, we provide consolidated property tax levy rates in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
+          <p>Here, we provide consolidated property-tax levy rates in each city, including all local and state levies – those to fund schools, fire districts and for other purposes. In many Washington cities, consolidated levy rates vary even within the same city because of overlapping taxing districts. We’ve used a single rate for each city – either a predominant rate or an average rate – provided by county assessors.</p>
 
           <p>But the levy rate is only half the equation. The other half is the value of the property, as determined by county assessors. To determine the property tax owed, the value is divided by 1,000 and multiplied by the levy rate. For example, the owner of a property in Bellevue valued at $1 million would owe $9,194.41 in property taxes: $1,000,000/1,000 = 1,000 x 9.19441 = $9,194.41.</p> 
 
-          <p>But there are wide variations in local real estate values, and a million-dollar property in Tacoma will likely be very different than one at that valuation in Bellevue. A business looking for the same amount and quality of space may indeed be able to find it for a lower cost in Tacoma than in Bellevue, resulting in a lower total property tax bill, even though Tacoma’s levy rate is higher. That’s part of why it is difficult to make a broadly applicable comparison of the property taxes businesses would pay from one city to another.</p>
+          <p>But there are wide variations in local real-estate values, and a million-dollar property in Tacoma will likely be very different from one at that valuation in Bellevue. A business looking for the same amount and quality of space may be able to find it for a lower cost in Tacoma than in Bellevue, resulting in a lower total property tax bill, even though Tacoma’s levy rate is higher. That’s part of why it is difficult to make a broadly applicable comparison of the property taxes businesses would pay from one city to another.</p>
 
-          <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane, or Clark counties.<br>
+          <p>You can find the assessed value of your property or search for specific properties at the assessor websites for King, Snohomish, Pierce, Spokane or Clark counties.<br>
             <ul>
               <li><a href="https://payment.kingcounty.gov/Home/Index?app=PropertyTaxes">King</a></li>
               <li><a href="http://gis.snoco.org/maps/property/viewer.htm">Snohomish</a></li>
@@ -187,7 +189,7 @@
 
           <p>During Seattle’s head-tax debate this spring, there was lots of rhetoric about rising business taxes in the city, but few, if any, comparisons of Seattle’s taxes to those levied by other Washington cities. Such a comparison is complicated by variations in tax structures and rates levied in each city, in the levels of service provided by different cities and in the cost of doing business from place to place.</p>
 
-          <p>Washington cities can tax businesses in four main ways: Property taxes, local sales taxes, business and occupation taxes (B&O), and utility taxes. There are also business license fees, sometimes augmented by what are effectively head taxes. There are other taxes and licensing fees cities collect from specific businesses – hotels, for example, and in Seattle, the new soda tax – that we’re not dealing with here.</p>
+          <p>Washington cities can tax businesses in four main ways: property taxes, local sales taxes, business and occupation taxes (B&O), and utility taxes. There are also business license fees, sometimes augmented by what are effectively head taxes. Cities collect other taxes and licensing fees from specific businesses – hotels, for example, and in Seattle, the new soda tax – that we’re not dealing with here.</p>
 
           <p>For this calculator, we’ve focused on B&O, sales taxes and business license fees, including those with a per-employee component.</p>
 
