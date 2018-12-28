@@ -26,11 +26,12 @@
   }
   </style>
   <body>
+  
     <responsive-child>
       <main v-cloak class="interactive">
         <header>
           <h1>Compare local business taxes in Washington</h1>
-          <p>Explore the local business-tax bill in 10 of Washington’s major cities with this tax comparison tool. There are important caveats to be aware of in this comparison, and it should not be used to estimate your actual local tax burden. Open the info boxes <small>ⓘ</small> to read more about the parameters and taxes, and see a more detailed explanation below.</p>
+            <p>Explore the local business-tax bill in 10 of Washington’s major cities with this tax comparison tool. It demonstrates some of the different ways Washington cities tax businesses (although it should not be used to estimate your actual local tax burden). Open the info boxes <small>ⓘ</small> to read more about the parameters and taxes, and see a more detailed explanation and caveats below.</p>
         </header>
 
         <!-- 
@@ -236,5 +237,6 @@
     <%= !json.project.embedded ? t.include("partials/_analytics.html") : "" %>
     <%= t.include("partials/_workHere.html") %>
     <% } %>
+    
   </body>
 </html>
